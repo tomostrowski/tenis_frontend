@@ -1,0 +1,274 @@
+header {
+  background-color: #17b259;
+  min-height: 10vh;
+}
+
+body {
+  background-color: rgb(233, 233, 233);
+}
+
+/* .page-height {
+  min-height: 80vh;
+} */
+
+.center {
+  display: flex;
+  justify-content: center;
+  margin: 2rem auto;
+}
+
+nav a {
+  color: white;
+  padding: 20px 30px;
+  text-decoration: none;
+}
+
+footer {
+  background-color: #157d3f;
+  color: white;
+  bottom: 0;
+  width: 100%;
+  height: 10vh; /* Footer height */
+  display: flex;
+}
+
+footer span {
+  padding: 10px 0 0 20px;
+}
+
+#logo {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+h1 {
+  padding-top: 4%;
+  /*font-size: 7vmin;*/
+  text-align: center;
+  color: #139263;
+}
+
+h2 {
+  padding-top: 3%;
+  color: #139263;
+}
+
+.contact-form {
+  background-color: #dce6ee;
+  /*position: relative;*/
+  margin: auto;
+  margin-top: 2%;
+  /*margin-bottom: 5%;*/
+  color: #139263;
+}
+
+.contact-form h2 {
+  margin-top: 10%;
+  text-align: left;
+  color: #139263;
+}
+
+.form-control:hover,
+.form-control:focus,
+.form-check-input:hover,
+.form-check-input:focus {
+  box-shadow: 0 0 2px #18b47b, 0 0 5px #0f6545, 0 0 5px #139263;
+}
+
+select,
+textarea {
+  background-color: rgb(247, 247, 247);
+  width: 100%; /* Full width */
+  padding: 12px; /* Some padding */
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical; /* Allow the user to vertically resize the textarea (not horizontally) */
+  line-height: 30px;
+  font-size: 3vmin;
+}
+
+.NoMatchError {
+  background-image: url("./images/404.jpg");
+  background-repeat: no-repeat;
+  background-size: 45%;
+  height: 500px;
+}
+
+.homePhoto {
+  font-family: Arial, Arial, Helvetica, sans-serif;
+  background-image: url("./images/tennis-sport.jpg");
+  background-repeat: no-repeat;
+  height: 350px;
+  width: 100%;
+  color: white;
+  text-align: center;
+  margin-top: 1vh;
+}
+
+button[type="submit"] {
+  background-color: #139263;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+textarea:focus {
+  color: white;
+  box-shadow: 0 0 2px #18b47b, 0 0 5px #0f6545, 0 0 5px #139263;
+}
+
+.background-layer {
+  /*display: inline-block;*/
+  background-color: #dce6ee;
+  padding: 4%;
+  max-width: 800px;
+}
+
+.btn:hover {
+  color: white;
+  /*border-color: #137950;*/
+  /* background-color: #137950; */
+  /* box-shadow: 0 0 2px #18b47b, 0 0 5px #0f6545, 0 0 5px #139263; */
+}
+
+.messageOK {
+  visibility:hidden;
+  color: rgb(27, 219, 27);
+  font-size: large;
+  font-weight: bolder;
+}
+
+.loader {
+  align-items: center; 
+  border: 7px solid #f3f3f3; /* Light grey */
+  border-top: 7px solid #139263; /* Green */
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  animation: spin 0.5s linear infinite;
+  margin: 2em 10em;
+}
+
+.loader-mini {
+  align-items: center; 
+  border: 4px solid #f3f3f3; /* Light grey */
+  border-top: 4px solid #139263; /* Green */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 0.5s linear infinite;
+  margin: 1em 10em;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.fas {
+  cursor: pointer;
+  color: #45504c;
+ }
+
+.fas:hover {
+  filter: brightness(0.7);
+}
+
+.fa-trash-alt {
+  color:red;
+}
+
+.input-edit:disabled {
+  background: rgb(233, 233, 233);
+  border-style: hidden;
+  color:green;
+  -moz-appearance: textfield;
+}
+
+.input-edit {
+  /* background-color: rgb(255, 221, 221); */
+  border-top: hidden;
+  border-left: hidden;
+  border-right: hidden;
+  border-color: lightcoral;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+/* The Modal (background) */
+.modal {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 5%; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(1,1,1,0.8); /* Black w/ opacity */
+  margin: auto;
+  text-align: center;
+
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  min-height:30%;
+  text-align: center;
+}
+ .close-button{
+  width: 100px;
+  margin-bottom: 5px;
+  align-self: flex-end;
+ }
+/* The Close Button */
+.close {
+  padding:0;
+  margin: 0;
+  color: #919191;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+  align-self: flex-end;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.table-scrollable{
+  display: block;
+  max-height: 200px;
+  width: 100%;
+  overflow-y: auto;
+  padding: auto 10%;
+}
+
+.table-scrollable td:first-child {
+  width: 40%;
+}
+
+.table-scrollable td:nth-child(2) {
+  width: 50%;
+}
+
+.table-scrollable td:last-child {
+  width: 40%;
+}
