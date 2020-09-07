@@ -6,15 +6,23 @@ import AddGroup from './AddGroup';
 
 const URL = `${process.env.REACT_APP_API}/group/`;
 
+
 class GroupList extends Component {
     state = { 
         id: 1,
         name: "Nazwa grupy",
         url: "/group",
+        groups: [],
         isLoading: true,
         showModal: false
     }
     
+    async componentDidMount() {
+        const groups = await (await fetch(URL+"all")).json();
+      
+        this.setState({ groups, isLoading: false });
+      }
+
     render() { 
         console.log(">>>>>>>> długość tablicy groups: ",this.state.groups)
         const  { groups } = this.state;
@@ -55,11 +63,7 @@ class GroupList extends Component {
         </React.Fragment> );
     }
 
-    async componentDidMount() {
-        const groups = await (await fetch(URL+"all")).json();
-      
-        this.setState({ groups, isLoading: false });
-      }
+  
 
       deleteGroup(groupId) {
         if (window.confirm("Czy na pewno chcesz usunąć tę grupę?"))
@@ -71,7 +75,6 @@ class GroupList extends Component {
           }
           })   
           .then(function(response){
-
             if (response.ok) {
               return response.text().then(function(message ){alert(message )})
           } else {

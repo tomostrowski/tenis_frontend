@@ -8,7 +8,7 @@ import AddScores from './AddScores';
 class Game extends Component {
     state = { 
         games:[],
-        playerId: this.props.groupId,
+        groupId: this.props.groupId,
         isLoading: false,
         showModal: false,
         editGame: false,
@@ -34,22 +34,8 @@ class Game extends Component {
     if (this.props.playerId ==="0") {urlToApiGames= `${process.env.REACT_APP_API}/group/`+this.state.groupId+"/allGames"; }
     else {urlToApiGames= `${process.env.REACT_APP_API}/player/`+ this.props.playerId+"/group="+this.state.groupId+"/allGames";}
       
-  
-    //   const player = await (await fetch(urlToApi)).json();
-    //       this.setState({
-    //         id: player.id,
-    //         name: player.name,
-    //         surname: player.surname,
-    //         email: player.email,
-    //         groups: [{name: "Nazwa grupy"}],   
-    //         isLoading: false,
-    //         isEditing: false,
-    //       });
       const games = await (await fetch(urlToApiGames)).json();
           this.setState({games});
-        //   alert("playerId"+this.props.playerId)
-      // const players = await (await fetch(urlToApiGroup)).json();
-      //     this.setState({players});    
     }
 
     render() { 
@@ -81,9 +67,8 @@ class Game extends Component {
                     <tr>
                     <th scope="row">{rating++}</th>
                         <td>{game.date}</td>
-                       
                         <td> 
-                            {game.scores.length && game.firstPlayerId==game.winnerId?<span>{game.firstPlayer}<span className={winnerClass}>winner</span></span>:<span>{game.firstPlayer}</span>} 
+                        {game.scores.length && game.firstPlayerId==game.winnerId?<span>{game.firstPlayer}<span className={winnerClass}>winner</span></span>:<span>{game.firstPlayer}</span>} 
                         </td>
                         <td> 
                         {game.scores.length && game.secondPlayerId==game.winnerId?<span>{game.secondPlayer}<span className={winnerClass}>winner</span></span>:<span>{game.secondPlayer}</span>} 
@@ -99,11 +84,9 @@ class Game extends Component {
                         }
                         </td>
                         <td><span id={game.id} className="fas fa-pencil-alt float-right" onClick={()=> this.editGame(game.id)}></span></td> 
-                        <td><span className="fas fa-trash-alt float-right" onClick={()=> this.deleteGame(game.id)}></span></td> 
                 </tr> </>)}</>}
                 </tbody>
             </table>
-            {/* <Link to="/AddGame"><button className="btn btn-success btn-sm m-2"> Zaproś na mecz</button></Link>  */}
             
            </div>
            }
@@ -187,15 +170,14 @@ class Game extends Component {
           }
           })
           .then(function(response){
-            if (response.ok) {
+              // eslint-disable-next-line 
+            if (response.status == 200) {
               return response.text().then(function(message ){alert(message )})
           } else {
               return response.text().then(function(message ){alert(message)})
           }
           })
-          // window.open("/");
           window.location.reload();
-          // window.location.hash = "jump_to_this_location";
         }
       }
 

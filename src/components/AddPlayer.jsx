@@ -32,6 +32,7 @@ export class AddPlayer extends Component {
                 <input
                   type="text"
                   name="name"
+                  minlength="2"
                   className="form-control"
                   id="exampleInputName"
                   aria-describedby="nameHelp"
@@ -42,6 +43,7 @@ export class AddPlayer extends Component {
                 <input
                   type="text"
                   name="surname"
+                  minlength="2"
                   className="form-control"
                   id="exampleInputSurname"
                   aria-describedby="nameHelp"
@@ -60,15 +62,15 @@ export class AddPlayer extends Component {
                 <div id="emailHelp" className="form-text text-muted">
                 </div>
               </div>
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label htmlFor="exampleInputPassword1">Hasło</label>
                 <input
                   type="password"
                   className="form-control"
                   id="exampleInputPassword1"
                 />
-              </div>
-              <div className="form-group form-check">
+              </div> */}
+              {/* <div className="form-group form-check">
                 <input
                   type="checkbox"
                   className="form-check-input"
@@ -77,7 +79,7 @@ export class AddPlayer extends Component {
                 <label className="form-check-label" htmlFor="exampleCheck1">
                   Wyślij maila z wiadomością do zawodnika
                 </label>
-              </div>
+              </div> */}
               <button type="submit" className="submit">
                 Dodaj
               </button>

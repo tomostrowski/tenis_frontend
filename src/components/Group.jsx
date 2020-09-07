@@ -18,7 +18,6 @@ class Group extends Component {
     }
 
     async componentDidMount() {
-      // const groups = await (await fetch("http://tenis-projekt.herokuapp.com/api/group/all")).json(); // ZMIENIC!!!!!!!!!!!!!!!!!!!!!!!
       const group = await (await fetch(URL+ this.props.match.params.groupId)).json();
       this.setState({ id:group.id,name:group.name, players:group.players,isLoading: false });
 
@@ -164,7 +163,7 @@ class Group extends Component {
 
       async patchApi(url) {
         try {
-          let result = await fetch(url,
+          await fetch(url,
             {
               method: "PATCH",
               mode: "cors",

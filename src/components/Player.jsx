@@ -318,7 +318,7 @@ deletePlayer(playerId) {
     try{
      let url = URL+this.state.id+"/";
     isNaN(groupId)? url = url + "addGroupName="+groupId : url = url + "addGroup="+groupId;
-    // alert(url);
+    alert(url);
     fetch(url,{
       method: 'PATCH',
       // mode: "CORS",

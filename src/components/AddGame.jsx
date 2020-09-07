@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PlayerInGroupCombo from './PlayerInGroupCombo';
 
 class AddGame extends Component {
     state = { 
@@ -7,7 +6,6 @@ class AddGame extends Component {
       playerId: this.props.playerId,
       playersWithoutChoosen:[],
       playerToChoose1:0
-
      }
 
     async componentDidMount() {
@@ -50,7 +48,7 @@ class AddGame extends Component {
 
                     {/* <PlayerInGroupCombo groupId={this.props.groupId} playerToChoose1={this.state.playerToChoose1}/> */}
 
-                    <label htmlFor="exampleInputEmail1">Data</label>
+                    <label htmlFor="date">Data</label>
                     <input
                       type="date"
                       name="matchData2"
@@ -65,7 +63,7 @@ class AddGame extends Component {
                       type="time"
                       name="sendEmail"
                       className="form-control"
-                      id="sendEmail"
+                      id="gameTime"
                       aria-describedby="dataHelp2"
                       onChange={this.handleChange}
                     /><br />
@@ -86,24 +84,22 @@ class AddGame extends Component {
         event.preventDefault();
         const player1 = document.getElementById("playerToChoose1").value;
         const player2 = document.getElementById("playerToChoose2").value;
-        const date = document.getElementById("gameDate").value
-        const url = `${process.env.REACT_APP_API}/player/`+player1+"/game/player="+player2+"/group="+this.props.groupId+"/date="+date+"/winner="+1;
+        const date = document.getElementById("gameDate").value;
+        const time = document.getElementById("gameTime").value;
+        const url = `${process.env.REACT_APP_API}/player/${player1}/game/player=${player2}/group=${this.props.groupId}/date=${date}/time=${time}`;
         this.postToUrl(url);
     }
 
       handleChange = (event) =>{
         const player1Id = document.getElementById("playerToChoose1").value;
-        // console.log("Value of element"+document.getElementById("playerToChoose1").value)
-        // alert(playerId)
         
         const playersWithoutChoosen= this.state.players.filter(player=>player1Id!=player.id)
-        // alert(playersWithoutChoosen.length)
         this.setState({playersWithoutChoosen: playersWithoutChoosen})
         this.setState({playerToChoose: player1Id})
       }
 
     async postToUrl(url){
-      // alert(url)
+      alert(url)
        await fetch(url,
         {
             method: 'POST',

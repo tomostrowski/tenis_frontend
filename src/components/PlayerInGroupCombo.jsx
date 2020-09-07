@@ -8,11 +8,6 @@ class PlayerInGroupCombo extends Component {
        }
   
       async componentDidMount() {
-        // const groups = await (await fetch("http://tenis-projekt.herokuapp.com/api/group/all")).json(); // ZMIENIC!!!!!!!!!!!!!!!!!!!!!!!
-        // const group = await (await fetch("http://localhost:8989/api/group/"+ this.props.match.params.groupId)).json();
-        // this.setState({ id:group.id,name:group.name, players:group.players,isLoading: false });
-    
-        // const playerStats = await (await fetch("http://localhost:8989/api/group/"+ this.props.match.params.groupId+"/getPlayers")).json();
         const urlToApi= `${process.env.REACT_APP_API}/group/`+this.props.groupId+"/getPlayers"
         // alert(this.props.groupId)
         const players = await(await(fetch(urlToApi))).json();

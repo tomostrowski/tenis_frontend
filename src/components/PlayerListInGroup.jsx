@@ -4,17 +4,18 @@ import {Link} from 'react-router-dom';
 import Modal from './Modal';
 import AddPlayer from './AddPlayer';
   
-const URL = `${process.env.REACT_APP_API}/group/`;
+const URL = `${process.env.REACT_APP_API}`;
 
 class PlayerListInGroup extends Component {
     state = { 
         url: "/player",
+        groupId: this.props.groupId,
         playerStats: [],
         showModal: false
      }
 
      async componentDidMount() {
-        const urlToApi= URL+this.props.groupId+"/getPlayers"
+        const urlToApi= URL+`/group/${this.props.groupId}/getPlayers`
         const playerStats = await(await(fetch(urlToApi))).json();
         this.setState({playerStats});
       }
@@ -58,43 +59,24 @@ class PlayerListInGroup extends Component {
                                             
                                             </div>
                                           </td>
-                                          <td><span className="fas fa-trash-alt float-right" onClick={()=> this.deletePlayer(player.id)}></span></td>
+                                          <td><span className="fas fa-minus float-right" onClick={()=> this.removePlayer(player.id, this.state.groupId)}></span></td>
                                           
                                       </tr>
                                   )} </>}
                                   </tbody>
                             </table>
-                            {/* <Link to="/AddPlayer"><button className="btn btn-success btn-sm m-2"> Dodaj nowego zawodnika do tej grupy</button></Link> */}
-                            
-                            
-                            
-
                             <button className="btn btn-success btn-sm m-2" onClick={e => {
                                   this.showModal();
                                     }}> Dodaj zawodnika </button>
            
                   <Modal showModalCallback={this.showModalCallback}  showModal={this.state.showModal} >
-      {/* <AddGame groupId={this.props.groupId}/> */}
                <FindPlayer groupId={this.props.groupId}/>
                <AddPlayer />
                <button className="btn btn-secondary close-button" onClick={this.showModalCallback}>Anuluj</button>
                </Modal>
 
-               {/* <button className="btn btn-success btn-sm m-2" onClick={e => {
-                    this.showModal();
-                }}> Dodaj mecz </button>
-           
-           <Modal showModalCallback={this.showModalCallback}  showModal={this.state.showModal} >
-               <b>Dodaj mecz</b>
-               <span>W grupie ...</span>
-               <AddGame groupId={this.props.groupId}/>
-               <button className="btn btn-secondary close-button" onClick={this.showModalCallback}>Anuluj</button>
-               </Modal> */}
-
-
                             </div>
               }
-                      {/* </form> */}
                       </React.Fragment>
                    );
               }
@@ -198,7 +180,7 @@ class PlayerListInGroup extends Component {
                 async patchApi() {
                   const groupId = this.state.group.id;
                   try {
-                    let result = await fetch(URL+groupId,
+                    let result = await fetch(URL`/group/${groupId}`,
                       {
                         method: "PATCH",
                         mode: "cors",
@@ -215,6 +197,28 @@ class PlayerListInGroup extends Component {
                     console.log(e);
                   }
                 }           
+
+                removePlayer(playerId,groupId) {
+                  if (window.confirm("Czy na pewno chcesz usunąć zawodnika z tej grupy?"))
+                  // alert("PLAYER"+playerId+"   GROUP:"+groupId);
+                  {
+                    fetch(URL+`/player/${playerId}/removeGroup=${groupId}`, { 
+                      method:'PATCH',
+                      mode: "cors",
+                      header:{'Accept': 'application/json',
+                      'Content-Type':'applicaton/json'
+                    }
+                    })   
+                    .then(function(response){
+                      if (response.ok) {
+                        return response.text().then(function(message ){alert(message )})
+                    } else {
+                        return response.text().then(function(message ){alert(message)})
+                    }
+                    })
+                    window.location.reload();
+                  }
+                }
 
                 showModal = e => {
                   this.setState({

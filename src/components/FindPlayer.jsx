@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 
+const URL = `${process.env.REACT_APP_API}/player/`;
+
 class FindPlayer extends Component {
     state = {
             players: [],
@@ -60,19 +62,26 @@ class FindPlayer extends Component {
       }
 
 
-    async  addToGroup(playerId, groupId){
+    async addToGroup(playerId, groupId){
         try{
-            let url = `${process.env.REACT_APP_API}/player/`+playerId+"/";
-           isNaN(groupId)? url = url + "addGroupName="+groupId : url = url + "addGroup="+groupId;
-           // alert(url);
+            let url = URL+`${playerId}/addGroup=${groupId}`;
+        //    isNaN(groupId)? url = url + "addGroupName="+groupId : url = url + "addGroup="+groupId;
+           alert(url);
            fetch(url,{
              method: 'PATCH',
-             // mode: "CORS",
+            //  mode: "CORS",
              header: {'Accept': 'application/json',
              'Content-Type':'applicaton/json'
              }
            })
-           window.location.reload();
+           .then(function(response){
+            if (response.ok) {
+              return response.text().then(function(message ){alert(message )})
+          } else {
+              return response.text().then(function(message ){alert(message)})
+          }
+          })
+          window.location.reload();
        
            } catch(error){
              console.log(error);

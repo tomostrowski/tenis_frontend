@@ -2,35 +2,22 @@ import React, { Component } from 'react';
 
 class EditGame extends Component {
     state = { 
-              id: 0,
-              date:"2020-01-01",
-              time:"00:00",
-              firstPlayerId:1,
-              firstPlayer:"Zawodnik domyślny",
-              secondPlayerId:1,
-              secondPlayer:"Zawodnik domyślny",
-              gameId: this.props.gameId
-
+      gameId: this.props.gameId,
+      game:[]
             }
 
     async componentDidMount() {
-        const urlToApi= `${process.env.REACT_APP_API}/game`+this.props.gameId;
-        alert("gameId:  "+this.props.gameId)
+        const urlToApi= `${process.env.REACT_APP_API}/game/`+this.state.gameId;
+
+        alert("gameId "+this.state.gameId)
+
         const game = await(await(fetch(urlToApi))).json();
-        this.setState({
-                        id:game.id,
-                        date:game.date,
-                        time:game.time,
-                        firstPlayerId: game.firstPlayerId,
-                        firstPlayer: game.firstPlayer,
-                        secondPlayerId: game.secondPlayerId,
-                        secondPlayer: game.secondPlayer,
-                      });
+        this.setState({game});
       }
 
 
     render() { 
-      const game = this.state;
+      // const game = this.state;
         return ( 
             <React.Fragment>
             <div className="page-height">
@@ -41,18 +28,14 @@ class EditGame extends Component {
                   <div className="form-group">
                     <label>Zawodnik #1</label>
                     <select id="playerToChoose1" name="player1" onChange={this.handleChange}>
-                     {/* {!players.length? */}
-                     {/* <><option selected selected hidden disabled>Brak zawodników</option></>: */}
-                     {/* players.map(player=>  */}
-                        <option value={game.firstPlayerId}>{game.firstPlayer} </option>
-                        {/* )}  */}
+                        <option value={this.state.game.id}>{this.state.game.firstPlayer}  </option>
                     </select>
                     <label>Zawodnik #2</label>
                     <select id="playerToChoose2" name="player2" onChange={this.handleChange}>
                     {/* {!players.length? */}
                      {/* <><option selected hidden disabled>Brak zawodników</option></>: */}
                      {/* players.map(player=> */}
-                      <option value={game.secondPlayerId}>{game.secondPlayer} </option>
+                      <option value={this.state.game.secondPlayerId}>{this.state.game.secondPlayer} </option>
                      {/* )} */}
                     </select>
                     <label htmlFor="exampleInputEmail1">Data</label>
@@ -61,7 +44,7 @@ class EditGame extends Component {
                       type="text"
                       name="date"
                       className="form-control"
-                      placeholder={game.date}
+                      placeholder={this.state.game.date}
                       onFocus={this.handleDate}
                       aria-describedby="dataHelp"
                       onChange={this.handleChange}
@@ -72,7 +55,7 @@ class EditGame extends Component {
                       id="gameTime"
                       type="text"
                       name="time"
-                      placeholder={game.time}
+                      placeholder={this.state.game.time}
                       onFocus={this.handleTime}
                       className="form-control"
                       aria-describedby="timeHelp2"
@@ -80,13 +63,13 @@ class EditGame extends Component {
                     />
                       <label>Wygrany</label>
                         <select id="winnerToChoose" name="winner" onChange={this.handleChange}>
-                          <option value={game.firstPlayerId}>{game.firstPlayer} </option>
-                          <option value={game.secondPlayerId}>{game.secondPlayer} </option>
+                          <option value={this.state.game.firstPlayerId}>{this.state.game.firstPlayer} </option>
+                          <option value={this.state.game.secondPlayerId}>{this.state.game.secondPlayer} </option>
                         </select>
                     <br />
-                  {/* <button className="btn btn-success btn-lg m-2" type="submit" >
-                    Dodaj
-                  </button> */}
+                  <button className="btn btn-success btn-lg m-2" type="submit" >
+                    Zapisz
+                  </button>
                   </div>
                 </form>
               </div>
@@ -116,9 +99,9 @@ class EditGame extends Component {
       const value = event.target.value;
       let url = "http://localhost:8989/api/game/"
 
-      if(!name.includes("player"))
+      if(!name.includes("winner"))
       { url = url+this.state.gameId+"/"+name+"="+value}
-      else {url = url+this.state.gameId+"/"}
+      else {url = url+this.state.gameId+"/winner="+value}
       alert(url)
       this.patchUpdate(url)
     }
